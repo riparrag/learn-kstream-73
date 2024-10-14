@@ -1,4 +1,3 @@
-
 ### Interacting with Kafka
 
 #### Produce Messages
