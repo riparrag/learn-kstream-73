@@ -12,7 +12,7 @@ docker exec -it broker bash
 
 ```
 kafka-console-producer --broker-list localhost:9092 --topic greetings
-
+```
 
 #### Consume Messages
 
@@ -25,3 +25,4 @@ docker exec -it broker bash
 
 ```
 kafka-console-consumer --bootstrap-server localhost:9092 --topic greetings-output
+```
