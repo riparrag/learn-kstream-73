@@ -1,0 +1,9 @@
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  kafka:
+    streams:
+      application-id: learn-kstream-73
+      bootstrap-servers: kafka.prod.com:9092

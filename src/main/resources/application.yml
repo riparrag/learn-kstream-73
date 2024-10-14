@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: learn-kstream-73
+  profiles:
+    active: local
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  kafka:
+    streams:
+      application-id: learn-kstream-73
+      bootstrap-servers: localhost:9092
