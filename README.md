@@ -1,3 +1,21 @@
+# Master Kafka Streams course
+## Set up Kafka Environment using Docker from kafka-streams-api-for-developers
+Place in /c/path/to/kafka-streams-api-for-developers having docker-compose.yml
+- This should set up the Zookeeper and Kafka Broker in your local environment
+```aidl
+docker-compose up
+```
+### Verify the Local Kafka Environment
+- Run this below command
+```
+docker ps
+```
+- You should be below containers up and running in local
+```
+CONTAINER ID   IMAGE                                   COMMAND                  CREATED          STATUS          PORTS                                            NAMES
+fb28f7f91b0e   confluentinc/cp-server:7.1.0            "/etc/confluent/dock…"   50 seconds ago   Up 49 seconds   0.0.0.0:9092->9092/tcp, 0.0.0.0:9101->9101/tcp   broker
+d00a0f845a45   confluentinc/cp-zookeeper:7.1.0         "/etc/confluent/dock…"   50 seconds ago   Up 49 seconds   2888/tcp, 0.0.0.0:2181->2181/tcp, 3888/tcp       zookeeper
+```
 ### Interacting with Kafka
 
 #### Produce Messages
