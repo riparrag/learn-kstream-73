@@ -30,7 +30,12 @@ public class GreetingsStreamsTopology {
 
         greetingsStream.print(Printed.<String, Greeting>toSysOut().withLabel("greetingsStream"));
 
-        var modifiedStream = greetingsStream.mapValues((readOnlyKey, value) -> new Greeting(value.message().toUpperCase(), value.timestamp()));
+        var modifiedStream = greetingsStream.mapValues((readOnlyKey, value) -> {
+//            if (value.message().equals("error")) {
+//                throw new RuntimeException("error");
+//            }
+            return new Greeting(value.message().toUpperCase(), value.timestamp());
+        });
 
         modifiedStream.print(Printed.<String, Greeting>toSysOut().withLabel("modifiedStream"));
 

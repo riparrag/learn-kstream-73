@@ -20,6 +20,7 @@ public class GreetingMockDataProducer {
                 .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
         englishGreetings(objectMapper);
+        errorGreetings(objectMapper);
         spanishGreetings(objectMapper);
 
     }
@@ -54,6 +55,23 @@ public class GreetingMockDataProducer {
                         var greetingJSON = objectMapper.writeValueAsString(greeting);
                         var recordMetaData = ProducerUtil.publishMessageSync(GREETINGS, null, greetingJSON);
                         log.info("Published the alphabet message : {} ", recordMetaData);
+                    } catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+    }
+
+    private static void errorGreetings(ObjectMapper objectMapper) {
+        var spanishGreetings = List.of(
+                new Greeting("error", LocalDateTime.now()),
+                new Greeting("no error at all", LocalDateTime.now())
+        );
+        spanishGreetings
+                .forEach(greeting -> {
+                    try {
+                        var greetingJSON = objectMapper.writeValueAsString(greeting);
+                        var recordMetaData = ProducerUtil.publishMessageSync(GREETINGS, null, greetingJSON);
+                        log.info("Published the errors message : {} ", recordMetaData);
                     } catch (JsonProcessingException e) {
                         throw new RuntimeException(e);
                     }
