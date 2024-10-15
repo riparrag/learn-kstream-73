@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class GreetingsStreamsTopology {
-    public static String GREETINGS_TOPOLOGY_NAME = "greetings";
-    public static String GREETINGS_OUTPUT = "greetings-output";
+    public static final String GREETINGS_TOPOLOGY_NAME = "greetings";
+    public static final String GREETINGS_OUTPUT = "greetings-output";
 
     @Autowired
     public void process(StreamsBuilder streamsBuilder) {

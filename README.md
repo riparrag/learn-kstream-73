@@ -1,6 +1,6 @@
 # Master Kafka Streams course
-## Set up Kafka Environment using Docker from kafka-streams-api-for-developers
-Place in /c/path/to/kafka-streams-api-for-developers having docker-compose.yml
+## Set up Kafka Environment using Docker from docker-compose.yml
+Place in in same root dir having docker-compose.yml
 - This should set up the Zookeeper and Kafka Broker in your local environment
 ```aidl
 docker-compose up
