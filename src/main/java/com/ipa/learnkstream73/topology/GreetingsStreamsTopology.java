@@ -1,5 +1,6 @@
 package com.ipa.learnkstream73.topology;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ipa.learnkstream73.domain.Greeting;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.Serdes;
@@ -17,9 +18,15 @@ public class GreetingsStreamsTopology {
     public static String GREETINGS_TOPOLOGY_NAME = "greetings";
     public static String GREETINGS_OUTPUT = "greetings-output";
 
+    private ObjectMapper objectMapper;
+
+    public GreetingsStreamsTopology(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
     @Autowired
     public void process(StreamsBuilder streamsBuilder) {
-        var greetingsStream = streamsBuilder.stream(GREETINGS_TOPOLOGY_NAME, Consumed.with(Serdes.String(), new JsonSerde<Greeting>()));
+        var greetingsStream = streamsBuilder.stream(GREETINGS_TOPOLOGY_NAME, Consumed.with(Serdes.String(), new JsonSerde<>(Greeting.class, objectMapper)));
 
         greetingsStream.print(Printed.<String, Greeting>toSysOut().withLabel("greetingsStream"));
 
@@ -27,8 +34,7 @@ public class GreetingsStreamsTopology {
 
         modifiedStream.print(Printed.<String, Greeting>toSysOut().withLabel("modifiedStream"));
 
-        modifiedStream.to(GREETINGS_OUTPUT, Produced.with(Serdes.String(), new JsonSerde<Greeting>()));
-
+        modifiedStream.to(GREETINGS_OUTPUT, Produced.with(Serdes.String(), new JsonSerde<>(Greeting.class, objectMapper)));
 
     }
 }

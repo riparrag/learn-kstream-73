@@ -13,3 +13,9 @@ spring:
     streams:
       application-id: learn-kstream-73
       bootstrap-servers: localhost:9092
+    properties:
+      default:
+        deserialization:
+          exception:
+            handler: com.ipa.learnkstream73.exceptionhandler.CustomStreamsDeserializationExceptionHandler
+            #handler: org.apache.kafka.streams.errors.LogAndContinueExceptionHandler
