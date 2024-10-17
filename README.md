@@ -1,4 +1,5 @@
-# Master Kafka Streams course
+# Master Kafka Streams course - Sprinboot app Greetings Topology
+# see Branches for each lesson/section
 ## Set up Kafka Environment using Docker from docker-compose.yml
 Place in in same root dir having docker-compose.yml
 - This should set up the Zookeeper and Kafka Broker in your local environment
