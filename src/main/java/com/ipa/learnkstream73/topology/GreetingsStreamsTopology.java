@@ -18,15 +18,15 @@ public class GreetingsStreamsTopology {
     public static String GREETINGS_TOPOLOGY_NAME = "greetings";
     public static String GREETINGS_OUTPUT = "greetings-output";
 
-    private ObjectMapper objectMapper;
+/*    private ObjectMapper objectMapper;
 
     public GreetingsStreamsTopology(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
-    }
+    }*/
 
     @Autowired
     public void process(StreamsBuilder streamsBuilder) {
-        var greetingsStream = streamsBuilder.stream(GREETINGS_TOPOLOGY_NAME, Consumed.with(Serdes.String(), new JsonSerde<>(Greeting.class, objectMapper)));
+        var greetingsStream = streamsBuilder.stream(GREETINGS_TOPOLOGY_NAME, Consumed.with(Serdes.String(), new JsonSerde<>(Greeting.class)));
 
         greetingsStream.print(Printed.<String, Greeting>toSysOut().withLabel("greetingsStream"));
 
@@ -39,7 +39,7 @@ public class GreetingsStreamsTopology {
 
         modifiedStream.print(Printed.<String, Greeting>toSysOut().withLabel("modifiedStream"));
 
-        modifiedStream.to(GREETINGS_OUTPUT, Produced.with(Serdes.String(), new JsonSerde<>(Greeting.class, objectMapper)));
+        modifiedStream.to(GREETINGS_OUTPUT, Produced.with(Serdes.String(), new JsonSerde<>(Greeting.class)));
 
     }
 }
